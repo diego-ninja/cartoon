@@ -14,6 +14,9 @@ final class ValueParser
     private const array VALID_ESCAPES = ['\\\\', '\\"', '\\n', '\\r', '\\t'];
     private const array ESCAPE_REPLACEMENTS = ['\\', '"', "\n", "\r", "\t"];
 
+    /**
+     * @throws EscapeException
+     */
     public function parse(string $value): string|int|float|bool|null
     {
         $trimmed = trim($value);
@@ -48,6 +51,25 @@ final class ValueParser
         return $trimmed;
     }
 
+    /**
+     * @param non-empty-string $delimiter
+     * @return array<int, string|int|float|bool|null>
+     * @throws EscapeException
+     */
+    public function parseDelimitedValues(string $valueString, string $delimiter): array
+    {
+        $values = explode($delimiter, $valueString);
+        $parsedValues = [];
+        foreach ($values as $value) {
+            $parsedValues[] = $this->parse(trim($value));
+        }
+        return $parsedValues;
+    }
+
+
+    /**
+     * @throws EscapeException
+     */
     private function parseQuotedString(string $quoted): string
     {
         // Remove surrounding quotes
@@ -60,6 +82,9 @@ final class ValueParser
         return str_replace(self::VALID_ESCAPES, self::ESCAPE_REPLACEMENTS, $content);
     }
 
+    /**
+     * @throws EscapeException
+     */
     private function validateEscapes(string $content): void
     {
         $pos = 0;

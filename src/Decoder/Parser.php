@@ -3,7 +3,6 @@
 // ABOUTME: Builds AST from token stream.
 // ABOUTME: Handles nested structures, array headers, and validation.
 
-declare(strict_types=1);
 
 namespace Toon\Decoder;
 
@@ -12,7 +11,11 @@ use Toon\AST\Node;
 use Toon\AST\ObjectNode;
 use Toon\AST\PrimitiveNode;
 use Toon\DecodeOptions;
-use Toon\DelimiterType;
+use Toon\Decoder\Enum\RootType;
+use Toon\Decoder\Enum\TokenType;
+use Toon\Decoder\ValueParser;
+use Toon\Enum\DelimiterType;
+use Toon\Exception\EscapeException;
 use Toon\Exception\SyntaxException;
 use Toon\Exception\ValidationException;
 
@@ -28,6 +31,10 @@ final class Parser
 
     /**
      * @param array<int, Token> $tokens
+     * @return Node
+     * @throws EscapeException
+     * @throws SyntaxException
+     * @throws ValidationException
      */
     public function parse(array $tokens): Node
     {
@@ -63,6 +70,9 @@ final class Parser
         return RootType::Object;
     }
 
+    /**
+     * @throws EscapeException
+     */
     private function parsePrimitive(Token $token): PrimitiveNode
     {
         $value = $this->valueParser->parse($token->value);
@@ -71,6 +81,8 @@ final class Parser
 
     /**
      * @param array<int, Token> $tokens
+     * @throws SyntaxException
+     * @throws EscapeException|ValidationException
      */
     private function parseObject(array $tokens, int $startIndex, int $baseIndent = 0): ObjectNode
     {
@@ -125,6 +137,10 @@ final class Parser
 
     /**
      * @param array<int, Token> $tokens
+     * @return ArrayNode
+     * @throws SyntaxException
+     * @throws ValidationException
+     * @throws EscapeException
      */
     private function parseRootArray(array $tokens): ArrayNode
     {
@@ -133,39 +149,95 @@ final class Parser
 
     /**
      * @param array<int, Token> $tokens
+     * @throws ValidationException
+     * @throws SyntaxException|EscapeException
      */
     private function parseArray(array $tokens, int $startIndex, int $baseIndent): ArrayNode
     {
         $headerToken = $tokens[$startIndex];
 
         // Parse array header to extract length and delimiter
-        preg_match('/\[(\d+)([,\t|])?\]/', $headerToken->value, $matches);
+        preg_match('/\[(\d+)([,\t|])?\](?:\{([^}]+)\})?:/', $headerToken->value, $matches);
         $declaredLength = (int) $matches[1];
-        $delimiterChar = $matches[2] ?? ',';
+        $delimiterChar = empty($matches[2]) ? ',' : $matches[2];
+        $delimiter = DelimiterType::from($delimiterChar);
+        $fieldListString = $matches[3] ?? null; // Capture the field list string
 
-        $delimiter = match ($delimiterChar) {
-            ',' => DelimiterType::Comma,
-            "\t" => DelimiterType::Tab,
-            '|' => DelimiterType::Pipe,
-            default => DelimiterType::Comma,
-        };
+        $expectedFieldCount = -1; // -1 means no field list
+        if ($fieldListString !== null) {
+            $fields = $this->valueParser->parseDelimitedValues($fieldListString, $delimiterChar);
+            $expectedFieldCount = count($fields);
+        }
 
         // Collect array items
         $items = [];
         $i = $startIndex + 1;
 
         while ($i < count($tokens) && count($items) < $declaredLength) {
+            start_item_loop:
             $token = $tokens[$i];
+
+            if ($token->type === TokenType::BlankLine) {
+                if ($this->options->strict) {
+                    throw new SyntaxException(
+                        'Blank lines are not allowed inside arrays in strict mode',
+                        lineNumber: $token->lineNumber,
+                    );
+                }
+                $i++;
+                continue;
+            }
 
             if ($token->indentLevel < $baseIndent) {
                 break;
             }
 
-            if ($token->type === TokenType::Primitive || $token->type === TokenType::ListItem) {
+            // Ignore list markers, the real content is in the following tokens
+            if ($token->type === TokenType::ListItem) {
+                $i++;
+                continue;
+            }
+
+            // The first non-list-marker token determines the indent level for all items.
+            if (!isset($contentIndent)) {
+                $contentIndent = $token->indentLevel;
+            }
+
+            if ($token->indentLevel !== $contentIndent) {
+                $i++;
+                continue;
+            }
+
+            if ($token->type === TokenType::Primitive) {
+                if ($this->options->strict && $expectedFieldCount !== -1) {
+                    $rowValues = $this->valueParser->parseDelimitedValues($token->value, $delimiterChar);
+                    $valueCount = count($rowValues);
+
+                    if ($valueCount !== $expectedFieldCount) {
+                        throw new SyntaxException(
+                            "Tabular row width mismatch: declared {$expectedFieldCount} fields, found {$valueCount} value(s)",
+                            lineNumber: $token->lineNumber,
+                        );
+                    }
+                }
                 $items[] = $this->parsePrimitive($token);
             } elseif ($token->type === TokenType::ObjectKey) {
-                // This is an object in the array
-                $items[] = $this->parseObject($tokens, $i, $token->indentLevel);
+                // This is an object in the array. Parse it.
+                $objectNode = $this->parseObject($tokens, $i, $token->indentLevel);
+                $items[] = $objectNode;
+
+                // Now, we must advance $i past all the tokens this object just consumed.
+                // We find the next token that is NOT a child of this object.
+                $startIndex = $i + 1;
+                while ($startIndex < count($tokens)) {
+                    if ($tokens[$startIndex]->indentLevel < $token->indentLevel) {
+                        $i = $startIndex;
+                        goto start_item_loop;
+                    }
+                    $startIndex++;
+                }
+                $i = $startIndex;
+                continue;
             }
 
             $i++;
@@ -174,7 +246,7 @@ final class Parser
         // Validate length in strict mode
         if ($this->options->strict && count($items) !== $declaredLength) {
             throw new ValidationException(
-                "Array length mismatch: declared {$declaredLength}, found " . count($items),
+                "Array length mismatch: declared $declaredLength, found " . count($items),
                 lineNumber: $headerToken->lineNumber,
             );
         }
