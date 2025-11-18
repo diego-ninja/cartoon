@@ -23,11 +23,15 @@ final class TokenizerTest extends TestCase
         $tokenizer = new Tokenizer();
         $tokens = $tokenizer->tokenize('name: Alice');
 
-        $this->assertCount(1, $tokens);
+        $this->assertCount(2, $tokens);
         $this->assertSame(TokenType::ObjectKey, $tokens[0]->type);
         $this->assertSame('name', $tokens[0]->value);
         $this->assertSame(0, $tokens[0]->indentLevel);
         $this->assertSame(1, $tokens[0]->lineNumber);
+        $this->assertSame(TokenType::Primitive, $tokens[1]->type);
+        $this->assertSame('Alice', $tokens[1]->value);
+        $this->assertSame(0, $tokens[1]->indentLevel);
+        $this->assertSame(1, $tokens[1]->lineNumber);
     }
 
     public function test_tokenize_indented_key(): void
@@ -35,10 +39,13 @@ final class TokenizerTest extends TestCase
         $tokenizer = new Tokenizer();
         $tokens = $tokenizer->tokenize('  age: 30');
 
-        $this->assertCount(1, $tokens);
+        $this->assertCount(2, $tokens);
         $this->assertSame(TokenType::ObjectKey, $tokens[0]->type);
         $this->assertSame('age', $tokens[0]->value);
         $this->assertSame(2, $tokens[0]->indentLevel);
+        $this->assertSame(TokenType::Primitive, $tokens[1]->type);
+        $this->assertSame('30', $tokens[1]->value);
+        $this->assertSame(2, $tokens[1]->indentLevel);
     }
 
     public function test_tokenize_array_header(): void
@@ -81,10 +88,12 @@ TOON;
         $tokenizer = new Tokenizer();
         $tokens = $tokenizer->tokenize($input);
 
-        $this->assertCount(2, $tokens);
+        $this->assertCount(4, $tokens);
         $this->assertSame('name', $tokens[0]->value);
-        $this->assertSame('age', $tokens[1]->value);
-        $this->assertSame(2, $tokens[1]->lineNumber);
+        $this->assertSame('Alice', $tokens[1]->value);
+        $this->assertSame('age', $tokens[2]->value);
+        $this->assertSame('30', $tokens[3]->value);
+        $this->assertSame(2, $tokens[2]->lineNumber);
     }
 
     public function test_tokenize_skips_empty_lines(): void
@@ -98,7 +107,7 @@ TOON;
         $tokenizer = new Tokenizer();
         $tokens = $tokenizer->tokenize($input);
 
-        $this->assertCount(2, $tokens);
+        $this->assertCount(4, $tokens);
     }
 
     public function test_tokenize_mixed_tab_and_spaces(): void
@@ -106,7 +115,7 @@ TOON;
         $tokenizer = new Tokenizer();
         $tokens = $tokenizer->tokenize("\t  name: value");  // tab + 2 spaces = 6 indent
 
-        $this->assertCount(1, $tokens);
+        $this->assertCount(2, $tokens);
         $this->assertSame(6, $tokens[0]->indentLevel);
     }
 }

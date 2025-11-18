@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace Toon;
 
+use Toon\Decoder\Parser;
 use Toon\Decoder\Tokenizer;
 use Toon\Exception\UnencodableException;
 
@@ -22,21 +23,14 @@ final readonly class Toon
      */
     public static function decode(string $toon, ?DecodeOptions $options = null): mixed
     {
-        // Minimal implementation for testing - will be replaced with full parser
+        $options ??= new DecodeOptions();
+
         $tokenizer = new Tokenizer();
         $tokens = $tokenizer->tokenize($toon);
 
-        // Very basic object construction for testing
-        $result = [];
-        foreach ($tokens as $token) {
-            if ($token->type === \Toon\Decoder\TokenType::ObjectKey) {
-                $parts = explode(':', $token->value, 2);
-                if (count($parts) === 2) {
-                    $result[trim($parts[0])] = trim($parts[1]);
-                }
-            }
-        }
+        $parser = new Parser($options);
+        $ast = $parser->parse($tokens);
 
-        return $result;
+        return $ast->toPhp();
     }
 }

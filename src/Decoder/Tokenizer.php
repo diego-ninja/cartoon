@@ -34,55 +34,74 @@ final class Tokenizer
                 continue;
             }
 
-            $tokens[] = $this->tokenizeLine($line, $lineNumber);
+            $lineTokens = $this->tokenizeLine($line, $lineNumber);
+            foreach ($lineTokens as $token) {
+                $tokens[] = $token;
+            }
         }
 
         return $tokens;
     }
 
-    private function tokenizeLine(string $line, int $lineNumber): Token
+    /**
+     * @return array<int, Token>
+     */
+    private function tokenizeLine(string $line, int $lineNumber): array
     {
         $indentLevel = $this->calculateIndentLevel($line);
 
         // Try array header
         if (preg_match(self::PATTERN_ARRAY_HEADER, $line, $matches)) {
             // ArrayHeader: trim needed for optional empty string case
-            return new Token(
+            return [new Token(
                 type: TokenType::ArrayHeader,
                 value: trim($matches[2]) . $matches[3] . ':',
                 indentLevel: $indentLevel,
                 lineNumber: $lineNumber,
-            );
+            )];
         }
 
         // Try list item
         if (preg_match(self::PATTERN_LIST_ITEM, $line, $matches)) {
-            return new Token(
+            return [new Token(
                 type: TokenType::ListItem,
                 value: $matches[2],
                 indentLevel: $indentLevel,
                 lineNumber: $lineNumber,
-            );
+            )];
         }
 
         // Try object key
         if (preg_match(self::PATTERN_OBJECT_KEY, $line, $matches)) {
+            $tokens = [];
             // ObjectKey: No trim needed - regex captures clean (no leading/trailing spaces)
-            return new Token(
+            $tokens[] = new Token(
                 type: TokenType::ObjectKey,
                 value: $matches[2],
                 indentLevel: $indentLevel,
                 lineNumber: $lineNumber,
             );
+
+            // Check if there's an inline value
+            if (trim($matches[3]) !== '') {
+                $tokens[] = new Token(
+                    type: TokenType::Primitive,
+                    value: trim($matches[3]),
+                    indentLevel: $indentLevel,
+                    lineNumber: $lineNumber,
+                );
+            }
+
+            return $tokens;
         }
 
         // Must be primitive
-        return new Token(
+        return [new Token(
             type: TokenType::Primitive,
             value: trim($line),
             indentLevel: $indentLevel,
             lineNumber: $lineNumber,
-        );
+        )];
     }
 
     private function calculateIndentLevel(string $line): int

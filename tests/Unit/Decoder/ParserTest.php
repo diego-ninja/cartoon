@@ -80,7 +80,7 @@ final class ParserTest extends TestCase
         $tokens = [
             new Token(TokenType::ObjectKey, 'user', 0, 1),
             new Token(TokenType::ObjectKey, 'name', 2, 2),
-            new Token(TokenType::Primitive, 'Bob', 0, 2),
+            new Token(TokenType::Primitive, 'Bob', 2, 2),
         ];
 
         $parser = new Parser(new DecodeOptions());

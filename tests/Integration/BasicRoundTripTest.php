@@ -11,8 +11,6 @@ final class BasicRoundTripTest extends TestCase
 {
     public function test_decode_simple_object(): void
     {
-        $this->markTestSkipped('Waiting for Parser implementation');
-
         $toon = <<<TOON
 name: Alice
 age: 30
@@ -20,6 +18,26 @@ TOON;
 
         $result = Toon::decode($toon);
 
-        $this->assertSame(['name' => 'Alice', 'age' => '30'], $result);
+        $this->assertSame(['name' => 'Alice', 'age' => 30], $result);
+    }
+
+    public function test_decode_nested_object(): void
+    {
+        $toon = <<<TOON
+user:
+  name: Bob
+  age: 25
+TOON;
+
+        $result = Toon::decode($toon);
+
+        $expected = [
+            'user' => [
+                'name' => 'Bob',
+                'age' => 25,
+            ],
+        ];
+
+        $this->assertSame($expected, $result);
     }
 }

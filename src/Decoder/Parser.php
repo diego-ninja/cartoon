@@ -86,7 +86,7 @@ final class Parser
             }
 
             // Skip tokens not at our level
-            if ($token->indentLevel > $baseIndent && $token->type !== TokenType::ObjectKey) {
+            if ($token->indentLevel > $baseIndent) {
                 $i++;
                 continue;
             }
@@ -101,7 +101,7 @@ final class Parser
                 if ($i + 1 < count($tokens)) {
                     $nextToken = $tokens[$i + 1];
 
-                    // Check if next token is nested (higher indent)
+                    // Check if next token is nested (higher indent) or inline (same indent, same line)
                     if ($nextToken->indentLevel > $token->indentLevel) {
                         // Nested object or array
                         if ($nextToken->type === TokenType::ArrayHeader) {
@@ -109,11 +109,10 @@ final class Parser
                         } else {
                             $properties[$key] = $this->parseObject($tokens, $i + 1, $nextToken->indentLevel);
                         }
-                    } else {
-                        // Inline value (on same line, stored in token)
-                        // For now, we'll skip inline values as the tokenizer needs enhancement
-                        $i++;
-                        continue;
+                    } elseif ($nextToken->indentLevel === $token->indentLevel && $nextToken->lineNumber === $token->lineNumber) {
+                        // Inline value (on same line)
+                        $properties[$key] = $this->parsePrimitive($nextToken);
+                        $i++; // Skip the value token
                     }
                 }
             }
