@@ -144,6 +144,11 @@ final class Writer
 
     private function encodeObject(object $obj, int $depth): string
     {
+        // Check for unencodable objects
+        if ($obj instanceof \Closure) {
+            throw new UnencodableException('Cannot encode closure');
+        }
+
         // Track circular references
         $id = spl_object_id($obj);
         if (isset($this->visiting[$id])) {
