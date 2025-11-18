@@ -46,6 +46,7 @@ final class Tokenizer
 
         // Try array header
         if (preg_match(self::PATTERN_ARRAY_HEADER, $line, $matches)) {
+            // ArrayHeader: trim needed for optional empty string case
             return new Token(
                 type: TokenType::ArrayHeader,
                 value: trim($matches[2]) . $matches[3] . ':',
@@ -66,6 +67,7 @@ final class Tokenizer
 
         // Try object key
         if (preg_match(self::PATTERN_OBJECT_KEY, $line, $matches)) {
+            // ObjectKey: No trim needed - regex captures clean (no leading/trailing spaces)
             return new Token(
                 type: TokenType::ObjectKey,
                 value: $matches[2],

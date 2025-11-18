@@ -13,7 +13,6 @@ final class BasicRoundTripTest extends TestCase
     {
         $this->markTestSkipped('Waiting for Parser implementation');
 
-        // @phpstan-ignore-next-line
         $toon = <<<TOON
 name: Alice
 age: 30

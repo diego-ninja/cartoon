@@ -100,4 +100,13 @@ TOON;
 
         $this->assertCount(2, $tokens);
     }
+
+    public function test_tokenize_mixed_tab_and_spaces(): void
+    {
+        $tokenizer = new Tokenizer();
+        $tokens = $tokenizer->tokenize("\t  name: value");  // tab + 2 spaces = 6 indent
+
+        $this->assertCount(1, $tokens);
+        $this->assertSame(6, $tokens[0]->indentLevel);
+    }
 }
