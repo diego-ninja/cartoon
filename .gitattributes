@@ -1,0 +1,12 @@
+* text=auto eol=lf
+
+*.php text diff=php
+*.md text
+*.json text
+
+/tests export-ignore
+/.gitattributes export-ignore
+/.gitignore export-ignore
+/phpunit.xml export-ignore
+/phpstan.neon export-ignore
+/.php-cs-fixer.php export-ignore

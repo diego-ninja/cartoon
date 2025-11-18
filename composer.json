@@ -22,6 +22,16 @@
       "Toon\\Tests\\": "tests/"
     }
   },
+  "scripts": {
+    "test": "phpunit",
+    "test:coverage": "phpunit --coverage-html coverage",
+    "analyze": "phpstan analyse",
+    "fix": "php-cs-fixer fix",
+    "check": [
+      "@analyze",
+      "@test"
+    ]
+  },
   "config": {
     "sort-packages": true,
     "optimize-autoloader": true
