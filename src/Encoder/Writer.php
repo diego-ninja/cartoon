@@ -223,8 +223,9 @@ final class Writer
             $keyStr = $this->encodeKey($key);
             $valueStr = $this->writeValue($value, $depth + 1);
 
-            // Check if value is multiline
-            if (str_contains($valueStr, "\n")) {
+            // Check if value is multiline or a nested structure
+            $isNested = is_array($value) || is_object($value);
+            if (str_contains($valueStr, "\n") || $isNested) {
                 $lines[] = $this->indent($depth) . $keyStr . ':';
                 $lines[] = $valueStr;
             } else {
