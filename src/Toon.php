@@ -9,13 +9,16 @@ namespace Toon;
 
 use Toon\Decoder\Parser;
 use Toon\Decoder\Tokenizer;
-use Toon\Exception\UnencodableException;
+use Toon\Encoder\Writer;
 
 final readonly class Toon
 {
     public static function encode(mixed $data, ?EncodeOptions $options = null): string
     {
-        throw new UnencodableException('Encoder not yet implemented');
+        $options ??= new EncodeOptions();
+
+        $writer = new Writer($options);
+        return $writer->write($data);
     }
 
     /**

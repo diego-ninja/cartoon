@@ -40,4 +40,47 @@ TOON;
 
         $this->assertSame($expected, $result);
     }
+
+    public function test_encode_simple_object(): void
+    {
+        $data = ['name' => 'Alice', 'age' => 30];
+        $result = Toon::encode($data);
+
+        $expected = <<<TOON
+name: Alice
+age: 30
+TOON;
+
+        $this->assertSame($expected, $result);
+    }
+
+    public function test_round_trip_object(): void
+    {
+        $original = [
+            'name' => 'Charlie',
+            'age' => 35,
+            'active' => true,
+        ];
+
+        $encoded = Toon::encode($original);
+        $decoded = Toon::decode($encoded);
+
+        $this->assertSame($original, $decoded);
+    }
+
+    public function test_round_trip_nested(): void
+    {
+        $original = [
+            'user' => [
+                'name' => 'Diana',
+                'age' => 28,
+            ],
+            'active' => true,
+        ];
+
+        $encoded = Toon::encode($original);
+        $decoded = Toon::decode($encoded);
+
+        $this->assertSame($original, $decoded);
+    }
 }
