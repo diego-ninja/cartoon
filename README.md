@@ -65,13 +65,12 @@ tags[3]: php,toon,awesome
 ### Custom Encoding Options
 
 ```php
-use Toon\{Toon, EncodeOptions, DelimiterType, IndentationType};
+use Toon\{EncodeOptions,Enum\DelimiterType,Enum\IndentationType,Toon};
 
 $options = new EncodeOptions(
     preferredDelimiter: DelimiterType::Tab,
     indentSize: 4,
     indentationType: IndentationType::Tabs,
-    prettyArrays: true,
     maxCompactArrayLength: 20,
 );
 

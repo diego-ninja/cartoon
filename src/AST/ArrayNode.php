@@ -3,11 +3,10 @@
 // ABOUTME: Represents an array (ordered sequence) in the AST.
 // ABOUTME: Tracks delimiter type and declared length for validation.
 
-declare(strict_types=1);
 
 namespace Toon\AST;
 
-use Toon\DelimiterType;
+use Toon\Enum\DelimiterType;
 
 final readonly class ArrayNode implements Node
 {

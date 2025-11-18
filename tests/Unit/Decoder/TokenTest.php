@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Toon\Tests\Unit\Decoder;
 
 use PHPUnit\Framework\TestCase;
+use Toon\Decoder\Enum\TokenType;
 use Toon\Decoder\Token;
-use Toon\Decoder\TokenType;
 
 final class TokenTest extends TestCase
 {

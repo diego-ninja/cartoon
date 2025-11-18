@@ -5,7 +5,7 @@
 
 declare(strict_types=1);
 
-namespace Toon;
+namespace Toon\Enum;
 
 enum IndentationType
 {

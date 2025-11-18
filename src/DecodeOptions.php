@@ -12,6 +12,11 @@ final readonly class DecodeOptions
     public function __construct(
         public bool $strict = true,
         public bool $preserveKeyOrder = true,
-    ) {
+        public int $indentSize = 2,
+    ) {}
+
+    public static function default(): self
+    {
+        return new self();
     }
 }

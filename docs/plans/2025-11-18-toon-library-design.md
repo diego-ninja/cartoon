@@ -462,8 +462,9 @@ $decoded = Toon::decode($toon);
 ```
 
 **Advanced Configuration:**
+
 ```php
-use Toon\{Toon, EncodeOptions, DecodeOptions, DelimiterType, IndentationType};
+use Toon\{DecodeOptions,EncodeOptions,Enum\DelimiterType,Enum\IndentationType,Toon};
 
 $encoded = Toon::encode($data, new EncodeOptions(
     preferredDelimiter: DelimiterType::Tab,

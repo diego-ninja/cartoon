@@ -31,31 +31,27 @@ final class ErrorHandlingTest extends TestCase
 
     public function test_encode_closure_throws(): void
     {
-        $closure = fn() => 'test';
-
         $this->expectException(UnencodableException::class);
-        Toon::encode(['closure' => $closure]);
+        Toon::encode(fn() => 'test');
     }
 
-    public function test_encode_inf_throws(): void
+    public function test_encode_inf_and_nan_are_null(): void
     {
-        $this->expectException(UnencodableException::class);
-        Toon::encode(['value' => INF]);
-    }
-
-    public function test_encode_nan_throws(): void
-    {
-        $this->expectException(UnencodableException::class);
-        Toon::encode(['value' => NAN]);
+        // Per spec, INF and NAN must be encoded as null
+        $this->assertSame('null', Toon::encode(INF));
+        $this->assertSame('null', Toon::encode(NAN));
     }
 
     public function test_encode_circular_reference_throws(): void
     {
-        $obj = new \stdClass();
-        $obj->self = $obj;
-
         $this->expectException(CircularReferenceException::class);
-        Toon::encode($obj);
+
+        $a = new \stdClass();
+        $b = new \stdClass();
+        $a->child = $b;
+        $b->parent = $a;
+
+        Toon::encode($a);
     }
 
     public function test_decode_invalid_escape_throws(): void

@@ -9,7 +9,7 @@ use Toon\AST\ArrayNode;
 use Toon\AST\NodeType;
 use Toon\AST\ObjectNode;
 use Toon\AST\PrimitiveNode;
-use Toon\DelimiterType;
+use Toon\Enum\DelimiterType;
 
 final class ArrayNodeTest extends TestCase
 {

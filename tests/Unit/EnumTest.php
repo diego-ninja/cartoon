@@ -6,9 +6,9 @@ namespace Toon\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Toon\AST\NodeType;
-use Toon\Decoder\RootType;
-use Toon\DelimiterType;
-use Toon\IndentationType;
+use Toon\Decoder\Enum\RootType;
+use Toon\Enum\DelimiterType;
+use Toon\Enum\IndentationType;
 
 final class EnumTest extends TestCase
 {

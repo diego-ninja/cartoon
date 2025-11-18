@@ -6,15 +6,12 @@ namespace Toon\Tests\Unit\Decoder;
 
 use PHPUnit\Framework\TestCase;
 use Toon\AST\ArrayNode;
-use Toon\AST\NodeType;
 use Toon\AST\ObjectNode;
 use Toon\AST\PrimitiveNode;
 use Toon\DecodeOptions;
+use Toon\Decoder\Enum\TokenType;
 use Toon\Decoder\Parser;
 use Toon\Decoder\Token;
-use Toon\Decoder\TokenType;
-use Toon\DelimiterType;
-use Toon\Exception\SyntaxException;
 use Toon\Exception\ValidationException;
 
 final class ParserTest extends TestCase

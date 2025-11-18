@@ -1,1 +1,9 @@
 .worktrees/
+.idea/
+CLAUDE.md
+GEMINI.md
+coverage/
+vendor/
+/tester.php
+.php-cs-fixer.cache
+.phpunit.result.cache

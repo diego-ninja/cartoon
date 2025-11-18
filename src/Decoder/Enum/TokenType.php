@@ -5,7 +5,7 @@
 
 declare(strict_types=1);
 
-namespace Toon\Decoder;
+namespace Toon\Decoder\Enum;
 
 enum TokenType
 {
@@ -14,4 +14,5 @@ enum TokenType
     case ListItem;
     case Primitive;
     case Empty;
+    case BlankLine;
 }

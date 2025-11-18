@@ -15,7 +15,10 @@
   "autoload": {
     "psr-4": {
       "Toon\\": "src/"
-    }
+    },
+    "files": [
+      "./helpers.php"
+    ]
   },
   "autoload-dev": {
     "psr-4": {

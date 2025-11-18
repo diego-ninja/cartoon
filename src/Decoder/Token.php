@@ -7,6 +7,8 @@ declare(strict_types=1);
 
 namespace Toon\Decoder;
 
+use Toon\Decoder\Enum\TokenType;
+
 final readonly class Token
 {
     public function __construct(

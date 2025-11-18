@@ -419,11 +419,7 @@ declare(strict_types=1);
 
 namespace Toon\Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
-use Toon\AST\NodeType;
-use Toon\Decoder\RootType;
-use Toon\DelimiterType;
-use Toon\IndentationType;
+use PHPUnit\Framework\TestCase;use Toon\AST\NodeType;use Toon\Decoder\Enum\RootType;use Toon\Enum\DelimiterType;use Toon\Enum\IndentationType;
 
 final class EnumTest extends TestCase
 {
@@ -579,11 +575,7 @@ declare(strict_types=1);
 
 namespace Toon\Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
-use Toon\DecodeOptions;
-use Toon\DelimiterType;
-use Toon\EncodeOptions;
-use Toon\IndentationType;
+use PHPUnit\Framework\TestCase;use Toon\DecodeOptions;use Toon\EncodeOptions;use Toon\Enum\DelimiterType;use Toon\Enum\IndentationType;
 
 final class OptionsTest extends TestCase
 {
@@ -594,7 +586,6 @@ final class OptionsTest extends TestCase
         $this->assertSame(DelimiterType::Comma, $options->preferredDelimiter);
         $this->assertSame(2, $options->indentSize);
         $this->assertSame(IndentationType::Spaces, $options->indentationType);
-        $this->assertTrue($options->prettyArrays);
         $this->assertSame(10, $options->maxCompactArrayLength);
     }
 
@@ -604,14 +595,12 @@ final class OptionsTest extends TestCase
             preferredDelimiter: DelimiterType::Tab,
             indentSize: 4,
             indentationType: IndentationType::Tabs,
-            prettyArrays: false,
             maxCompactArrayLength: 20,
         );
 
         $this->assertSame(DelimiterType::Tab, $options->preferredDelimiter);
         $this->assertSame(4, $options->indentSize);
         $this->assertSame(IndentationType::Tabs, $options->indentationType);
-        $this->assertFalse($options->prettyArrays);
         $this->assertSame(20, $options->maxCompactArrayLength);
     }
 
@@ -655,13 +644,12 @@ declare(strict_types=1);
 
 namespace Toon;
 
-final readonly class EncodeOptions
+use Toon\Enum\DelimiterType;use Toon\Enum\IndentationType;final readonly class EncodeOptions
 {
     public function __construct(
         public DelimiterType $preferredDelimiter = DelimiterType::Comma,
         public int $indentSize = 2,
         public IndentationType $indentationType = IndentationType::Spaces,
-        public bool $prettyArrays = true,
         public int $maxCompactArrayLength = 10,
     ) {
     }
@@ -998,12 +986,7 @@ declare(strict_types=1);
 
 namespace Toon\Tests\Unit\AST;
 
-use PHPUnit\Framework\TestCase;
-use Toon\AST\ArrayNode;
-use Toon\AST\NodeType;
-use Toon\AST\ObjectNode;
-use Toon\AST\PrimitiveNode;
-use Toon\DelimiterType;
+use PHPUnit\Framework\TestCase;use Toon\AST\ArrayNode;use Toon\AST\NodeType;use Toon\AST\ObjectNode;use Toon\AST\PrimitiveNode;use Toon\Enum\DelimiterType;
 
 final class ArrayNodeTest extends TestCase
 {
@@ -1090,7 +1073,7 @@ declare(strict_types=1);
 
 namespace Toon\AST;
 
-use Toon\DelimiterType;
+use Toon\Enum\DelimiterType;
 
 final readonly class ArrayNode implements Node
 {
@@ -1178,9 +1161,7 @@ declare(strict_types=1);
 
 namespace Toon\Tests\Unit\Decoder;
 
-use PHPUnit\Framework\TestCase;
-use Toon\Decoder\Token;
-use Toon\Decoder\TokenType;
+use PHPUnit\Framework\TestCase;use Toon\Decoder\Enum\TokenType;use Toon\Decoder\Token;
 
 final class TokenTest extends TestCase
 {
@@ -1257,7 +1238,7 @@ declare(strict_types=1);
 
 namespace Toon\Decoder;
 
-final readonly class Token
+use Toon\Decoder\Enum\TokenType;final readonly class Token
 {
     public function __construct(
         public TokenType $type,
@@ -1305,9 +1286,7 @@ declare(strict_types=1);
 
 namespace Toon\Tests\Unit\Decoder;
 
-use PHPUnit\Framework\TestCase;
-use Toon\Decoder\TokenType;
-use Toon\Decoder\Tokenizer;
+use PHPUnit\Framework\TestCase;use Toon\Decoder\Enum\TokenType;use Toon\Decoder\Tokenizer;
 
 final class TokenizerTest extends TestCase
 {
@@ -1423,7 +1402,7 @@ declare(strict_types=1);
 
 namespace Toon\Decoder;
 
-final class Tokenizer
+use Toon\Decoder\Enum\TokenType;final class Tokenizer
 {
     private const string PATTERN_ARRAY_HEADER = '/^(\s*)([A-Za-z_][A-Za-z0-9_.]*|"(?:[^"\\\\]|\\\\.)*")?(\[\d+[,\t|]?\](?:\{[^}]+\})?):(.*)$/';
     private const string PATTERN_OBJECT_KEY = '/^(\s*)([A-Za-z_][A-Za-z0-9_.]*|"(?:[^"\\\\]|\\\\.)*"):\s*(.*)$/';
@@ -1598,8 +1577,7 @@ declare(strict_types=1);
 
 namespace Toon;
 
-use Toon\Decoder\Tokenizer;
-use Toon\Exception\UnencodableException;
+use Toon\Decoder\Tokenizer;use Toon\Exception\UnencodableException;
 
 final readonly class Toon
 {
@@ -1620,7 +1598,7 @@ final readonly class Toon
         // Very basic object construction for testing
         $result = [];
         foreach ($tokens as $token) {
-            if ($token->type === \Toon\Decoder\TokenType::ObjectKey) {
+            if ($token->type === Decoder\Enum\TokenType::ObjectKey) {
                 $parts = explode(':', $token->value, 2);
                 if (count($parts) === 2) {
                     $result[trim($parts[0])] = trim($parts[1]);
@@ -1907,18 +1885,7 @@ declare(strict_types=1);
 
 namespace Toon\Tests\Unit\Decoder;
 
-use PHPUnit\Framework\TestCase;
-use Toon\AST\ArrayNode;
-use Toon\AST\NodeType;
-use Toon\AST\ObjectNode;
-use Toon\AST\PrimitiveNode;
-use Toon\DecodeOptions;
-use Toon\Decoder\Parser;
-use Toon\Decoder\Token;
-use Toon\Decoder\TokenType;
-use Toon\DelimiterType;
-use Toon\Exception\SyntaxException;
-use Toon\Exception\ValidationException;
+use PHPUnit\Framework\TestCase;use Toon\AST\ArrayNode;use Toon\AST\ObjectNode;use Toon\AST\PrimitiveNode;use Toon\DecodeOptions;use Toon\Decoder\Enum\TokenType;use Toon\Decoder\Parser;use Toon\Decoder\Token;use Toon\Exception\ValidationException;
 
 final class ParserTest extends TestCase
 {
@@ -2046,14 +2013,7 @@ declare(strict_types=1);
 
 namespace Toon\Decoder;
 
-use Toon\AST\ArrayNode;
-use Toon\AST\Node;
-use Toon\AST\ObjectNode;
-use Toon\AST\PrimitiveNode;
-use Toon\DecodeOptions;
-use Toon\DelimiterType;
-use Toon\Exception\SyntaxException;
-use Toon\Exception\ValidationException;
+use Toon\AST\ArrayNode;use Toon\AST\Node;use Toon\AST\ObjectNode;use Toon\AST\PrimitiveNode;use Toon\DecodeOptions;use Toon\Decoder\Enum\RootType;use Toon\Decoder\Enum\TokenType;use Toon\Enum\DelimiterType;use Toon\Exception\SyntaxException;use Toon\Exception\ValidationException;
 
 final class Parser
 {
@@ -2489,10 +2449,7 @@ declare(strict_types=1);
 
 namespace Toon\Encoder;
 
-use Toon\EncodeOptions;
-use Toon\Exception\CircularReferenceException;
-use Toon\Exception\UnencodableException;
-use Toon\IndentationType;
+use Toon\EncodeOptions;use Toon\Enum\IndentationType;use Toon\Exception\CircularReferenceException;use Toon\Exception\UnencodableException;
 
 final class Writer
 {
@@ -3245,13 +3202,12 @@ tags[3]: php,toon,awesome
 ### Custom Encoding Options
 
 ```php
-use Toon\{Toon, EncodeOptions, DelimiterType, IndentationType};
+use Toon\{EncodeOptions,Enum\DelimiterType,Enum\IndentationType,Toon};
 
 $options = new EncodeOptions(
     preferredDelimiter: DelimiterType::Tab,
     indentSize: 4,
     indentationType: IndentationType::Tabs,
-    prettyArrays: true,
     maxCompactArrayLength: 20,
 );
 

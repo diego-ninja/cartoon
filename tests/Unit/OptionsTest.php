@@ -6,9 +6,9 @@ namespace Toon\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Toon\DecodeOptions;
-use Toon\DelimiterType;
 use Toon\EncodeOptions;
-use Toon\IndentationType;
+use Toon\Enum\DelimiterType;
+use Toon\Enum\IndentationType;
 
 final class OptionsTest extends TestCase
 {
@@ -19,7 +19,6 @@ final class OptionsTest extends TestCase
         $this->assertSame(DelimiterType::Comma, $options->preferredDelimiter);
         $this->assertSame(2, $options->indentSize);
         $this->assertSame(IndentationType::Spaces, $options->indentationType);
-        $this->assertTrue($options->prettyArrays);
         $this->assertSame(10, $options->maxCompactArrayLength);
     }
 
@@ -29,14 +28,12 @@ final class OptionsTest extends TestCase
             preferredDelimiter: DelimiterType::Tab,
             indentSize: 4,
             indentationType: IndentationType::Tabs,
-            prettyArrays: false,
             maxCompactArrayLength: 20,
         );
 
         $this->assertSame(DelimiterType::Tab, $options->preferredDelimiter);
         $this->assertSame(4, $options->indentSize);
         $this->assertSame(IndentationType::Tabs, $options->indentationType);
-        $this->assertFalse($options->prettyArrays);
         $this->assertSame(20, $options->maxCompactArrayLength);
     }
 
