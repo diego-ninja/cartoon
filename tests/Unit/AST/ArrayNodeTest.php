@@ -74,4 +74,16 @@ final class ArrayNodeTest extends TestCase
 
         $this->assertSame(1, $node->getDeclaredLength());
     }
+
+    public function test_array_node_get_items(): void
+    {
+        $items = [
+            new PrimitiveNode(1),
+            new PrimitiveNode(2),
+        ];
+
+        $node = new ArrayNode($items, DelimiterType::Comma, 2);
+
+        $this->assertSame($items, $node->getItems());
+    }
 }
