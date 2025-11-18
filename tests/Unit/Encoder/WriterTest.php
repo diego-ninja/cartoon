@@ -72,11 +72,13 @@ TOON;
         $writer = new Writer(new EncodeOptions());
         $resource = fopen('php://memory', 'r');
 
-        $this->expectException(UnencodableException::class);
-        $writer->write($resource);
-
-        if (is_resource($resource)) {
-            fclose($resource);
+        try {
+            $this->expectException(UnencodableException::class);
+            $writer->write($resource);
+        } finally {
+            if (is_resource($resource)) {
+                fclose($resource);
+            }
         }
     }
 

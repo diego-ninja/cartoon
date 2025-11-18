@@ -127,17 +127,17 @@ final class Writer
 
     private function escapeString(string $str): string
     {
+        // Check for unencodable control characters BEFORE escaping
+        if (preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F]/', $str)) {
+            throw new UnencodableException('String contains unencodable control characters');
+        }
+
         $escaped = $str;
         $escaped = str_replace('\\', '\\\\', $escaped);
         $escaped = str_replace('"', '\\"', $escaped);
         $escaped = str_replace("\n", '\\n', $escaped);
         $escaped = str_replace("\r", '\\r', $escaped);
         $escaped = str_replace("\t", '\\t', $escaped);
-
-        // Check for unencodable control characters
-        if (preg_match('/[\x00-\x08\x0B\x0C\x0E-\x1F]/', $escaped)) {
-            throw new UnencodableException('String contains unencodable control characters');
-        }
 
         return $escaped;
     }
