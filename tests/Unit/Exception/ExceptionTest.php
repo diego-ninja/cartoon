@@ -44,4 +44,11 @@ final class ExceptionTest extends TestCase
 
         $this->assertSame('users.0.name', $exception->getPath());
     }
+
+    public function test_validation_exception_includes_line_number(): void
+    {
+        $exception = new ValidationException('Invalid data', lineNumber: 42);
+
+        $this->assertSame(42, $exception->getLineNumber());
+    }
 }
