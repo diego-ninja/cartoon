@@ -1,4 +1,4 @@
-# Cartoon- Token-Oriented Object Notation for PHP
+# Cartoon - Token-Oriented Object Notation for PHP
 
 High-performance PHP 8.4+ library for encoding and decoding TOON (Token-Oriented Object Notation) format with full spec compliance.
 
