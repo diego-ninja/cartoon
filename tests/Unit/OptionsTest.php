@@ -55,4 +55,23 @@ final class OptionsTest extends TestCase
         $this->assertFalse($options->strict);
         $this->assertFalse($options->preserveKeyOrder);
     }
+
+    public function test_encode_options_default_factory(): void
+    {
+        $options = EncodeOptions::default();
+
+        $this->assertSame(DelimiterType::Comma, $options->preferredDelimiter);
+        $this->assertSame(2, $options->indentSize);
+        $this->assertSame(IndentationType::Spaces, $options->indentationType);
+        $this->assertSame(10, $options->maxCompactArrayLength);
+    }
+
+    public function test_decode_options_default_factory(): void
+    {
+        $options = DecodeOptions::default();
+
+        $this->assertTrue($options->strict);
+        $this->assertTrue($options->preserveKeyOrder);
+        $this->assertSame(2, $options->indentSize);
+    }
 }

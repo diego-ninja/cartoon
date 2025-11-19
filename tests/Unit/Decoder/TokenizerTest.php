@@ -122,4 +122,24 @@ TOON;
         $this->assertCount(2, $tokens);
         $this->assertSame(2, $tokens[0]->indentLevel); // 2 levels
     }
+
+    public function test_tokenize_with_zero_indent_size(): void
+    {
+        $tokenizer = new Tokenizer(new DecodeOptions(indentSize: 0));
+        $tokens = $tokenizer->tokenize("  name: value");
+
+        $this->assertCount(2, $tokens);
+        // With indentSize=0, any indentation is considered level 1
+        $this->assertSame(1, $tokens[0]->indentLevel);
+    }
+
+    public function test_tokenize_no_indent_with_zero_indent_size(): void
+    {
+        $tokenizer = new Tokenizer(new DecodeOptions(indentSize: 0));
+        $tokens = $tokenizer->tokenize("name: value");
+
+        $this->assertCount(2, $tokens);
+        // No indentation is level 0
+        $this->assertSame(0, $tokens[0]->indentLevel);
+    }
 }

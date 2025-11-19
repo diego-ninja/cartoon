@@ -109,4 +109,15 @@ final class HelperFunctionsTest extends TestCase
 
         $this->assertTrue($result->isValid());
     }
+
+    public function test_encode_to_file_throws_on_write_failure(): void
+    {
+        $data = ['name' => 'Alice'];
+        $invalidPath = '/nonexistent/directory/file.toon';
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Failed to write to file');
+
+        Toon::encodeToFile($data, $invalidPath);
+    }
 }
