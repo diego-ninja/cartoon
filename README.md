@@ -7,11 +7,10 @@ High-performance PHP 8.4+ library for encoding and decoding TOON (Token-Oriented
 ![PHP Version](https://img.shields.io/packagist/php-v/diego-ninja/cartoon.svg?style=flat-square&color=blue&logoColor=%23949ca4&labelColor=%233f4750)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&color=blue&logoColor=%23949ca4&labelColor=%233f4750)](https://opensource.org/licenses/MIT)
 ![GitHub last commit](https://img.shields.io/github/last-commit/diego-ninja/cartoon?style=flat-square&color=blue&logoColor=%23949ca4&labelColor=%233f4750)
-[![wakatime](https://wakatime.com/badge/user/bd65f055-c9f3-4f73-92aa-3c9810f70cc3/project/3cc2ec60-a8b4-4ddc-aeac-ea78e37a094b.svg?style=flat-square&color=blue&logoColor=%23949ca4&labelColor=%233f4750)](https://wakatime.com/badge/user/bd65f055-c9f3-4f73-92aa-3c9810f70cc3/project/3cc2ec60-a8b4-4ddc-aeac-ea78e37a094b)
-
+[![wakatime](https://wakatime.com/badge/user/bd65f055-c9f3-4f73-92aa-3c9810f70cc3/project/bb6a311d-e7d0-4f7c-8e9c-b7cd45b8af53.svg?style=flat-square&color=blue&logoColor=%23949ca4&labelColor=%233f4750)](https://wakatime.com/badge/user/bd65f055-c9f3-4f73-92aa-3c9810f70cc3/project/3cc2ec60-a8b4-4ddc-aeac-ea78e37a094b)
 [![Tests](https://img.shields.io/github/actions/workflow/status/diego-ninja/cartoon/tests.yml?branch=main&style=flat-square&logo=github&label=tests&logoColor=%23949ca4&labelColor=%233f4750)]()
 [![Static Analysis](https://img.shields.io/github/actions/workflow/status/diego-ninja/cartoon/static-analysis.yml?branch=main&style=flat-square&logo=github&label=phpstan%2010&logoColor=%23949ca4&labelColor=%233f4750)]()
-[![Code Style](https://img.shields.io/github/actions/workflow/status/diego-ninja/cartoon/code-style.yml?branch=main&style=flat-square&logo=github&label=pint%3A%20PER&logoColor=%23949ca4&labelColor=%233f4750)]()
+[![Code Style](https://img.shields.io/github/actions/workflow/status/diego-ninja/cartoon/code-style.yml?branch=main&style=flat-square&logo=github&label=style:%20PER&logoColor=%23949ca4&labelColor=%233f4750)]()
 [![Coveralls](https://img.shields.io/coverallsCoverage/github/diego-ninja/cartoon?branch=main&style=flat-square&logo=coveralls&logoColor=%23949ca4&labelColor=%233f4750&link=https%3A%2F%2Fcoveralls.io%2Fgithub%2Fdiego-ninja%2Fcartoon)]()
 
 ## Features
@@ -26,7 +25,7 @@ High-performance PHP 8.4+ library for encoding and decoding TOON (Token-Oriented
 ## Installation
 
 ```bash
-composer require toon/toon
+composer require diego-ninja/cartoon
 ```
 
 **Requirements:** PHP 8.4 or higher
@@ -44,7 +43,8 @@ age: 30
 active: true
 TOON;
 
-$data = Toon::decode($toon);
+$data = Toon::decode($toon); //or
+$data = toon_decode($toon);
 // ['name' => 'Alice', 'age' => 30, 'active' => true]
 ```
 
@@ -59,7 +59,8 @@ $data = [
     'tags' => ['php', 'toon', 'awesome'],
 ];
 
-$toon = Toon::encode($data);
+$toon = Toon::encode($data); //or
+$toon = toon_encode($data)
 ```
 
 Output:
@@ -148,8 +149,8 @@ See the [official spec](https://github.com/toon-format/spec/blob/main/SPEC.md) f
 ### Setup
 
 ```bash
-git clone https://github.com/your-username/toon.git
-cd toon
+git clone https://github.com/diego-ninja/cartoon.git
+cd cartoon
 composer install
 ```
 
@@ -181,16 +182,6 @@ composer test
 composer analyze
 composer fix
 ```
-
-## Performance
-
-Benchmarks on PHP 8.4 with JIT enabled:
-
-- **Decode**: ~1000 documents/sec (1KB each)
-- **Encode**: ~1500 documents/sec (1KB each)
-- **Memory**: < 2MB for 10K element arrays
-
-Run benchmarks: `vendor/bin/phpunit tests/Benchmark`
 
 ## Error Handling
 
