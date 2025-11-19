@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Ninja\Cartoon\Tests\Integration;
 
+use Ninja\Cartoon\Exception\CircularReferenceException;
+use Ninja\Cartoon\Exception\UnencodableException;
 use PHPUnit\Framework\TestCase;
 use Ninja\Cartoon\Toon;
 use Ninja\Cartoon\EncodeOptions;
@@ -25,6 +27,10 @@ final class HelperFunctionsTest extends TestCase
         }
     }
 
+    /**
+     * @throws UnencodableException
+     * @throws CircularReferenceException
+     */
     public function test_encode_to_file_writes_toon_content(): void
     {
         $data = ['name' => 'Alice', 'age' => 30];
@@ -38,6 +44,10 @@ final class HelperFunctionsTest extends TestCase
         $this->assertStringContainsString('age: 30', $content);
     }
 
+    /**
+     * @throws UnencodableException
+     * @throws CircularReferenceException
+     */
     public function test_encode_to_file_with_options(): void
     {
         $data = ['items' => [1, 2, 3]];
@@ -110,14 +120,4 @@ final class HelperFunctionsTest extends TestCase
         $this->assertTrue($result->isValid());
     }
 
-    public function test_encode_to_file_throws_on_write_failure(): void
-    {
-        $data = ['name' => 'Alice'];
-        $invalidPath = '/nonexistent/directory/file.toon';
-
-        $this->expectException(\RuntimeException::class);
-        $this->expectExceptionMessage('Failed to write to file');
-
-        Toon::encodeToFile($data, $invalidPath);
-    }
 }

@@ -1,4 +1,4 @@
-# TOON - Token-Oriented Object Notation for PHP
+# Cartoon- Token-Oriented Object Notation for PHP
 
 High-performance PHP 8.4+ library for encoding and decoding TOON (Token-Oriented Object Notation) format with full spec compliance.
 
@@ -228,6 +228,5 @@ MIT License. See [LICENSE](LICENSE) file.
 ## Links
 
 - [TOON Specification](https://github.com/toon-format/spec)
-- [Documentation](https://github.com/your-username/toon/docs)
-- [Issue Tracker](https://github.com/your-username/toon/issues)
+- [Issue Tracker](https://github.com/diego-ninja/cartoon/issues)
 - [Changelog](CHANGELOG.md)
