@@ -146,7 +146,7 @@ final class Tokenizer
             if ($spaces % $this->options->indentSize !== 0) {
                 throw new SyntaxException(
                     "Indentation must be an exact multiple of {$this->options->indentSize} spaces",
-                    lineNumber: $lineNumber
+                    lineNumber: $lineNumber,
                 );
             }
         }

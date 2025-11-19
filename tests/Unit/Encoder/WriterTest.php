@@ -409,7 +409,7 @@ TOON;
 
         // Per spec §8, an empty object at the root yields an empty document.
         $this->assertSame('', $writer->write(new \stdClass()));
-        $this->assertSame('', $writer->write((object)[]));
+        $this->assertSame('', $writer->write((object) []));
     }
 
     // -------------------------------------------------------------------------

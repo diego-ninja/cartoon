@@ -11,8 +11,7 @@ final readonly class PrimitiveNode implements Node
 {
     public function __construct(
         private string|int|float|bool|null $value,
-    ) {
-    }
+    ) {}
 
     public function getType(): NodeType
     {

@@ -58,7 +58,7 @@ final class ArrayNodeTest extends TestCase
         $node = new ArrayNode(
             [new PrimitiveNode('a'), new PrimitiveNode('b')],
             DelimiterType::Tab,
-            2
+            2,
         );
 
         $this->assertSame(DelimiterType::Tab, $node->getDelimiter());
@@ -69,7 +69,7 @@ final class ArrayNodeTest extends TestCase
         $node = new ArrayNode(
             [new PrimitiveNode('a')],
             DelimiterType::Comma,
-            1
+            1,
         );
 
         $this->assertSame(1, $node->getDeclaredLength());

@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 // ABOUTME: Represents an array (ordered sequence) in the AST.
 // ABOUTME: Tracks delimiter type and declared length for validation.
-
 
 namespace Toon\AST;
 
@@ -17,8 +18,7 @@ final readonly class ArrayNode implements Node
         private array $items,
         private DelimiterType $delimiter,
         private int $declaredLength,
-    ) {
-    }
+    ) {}
 
     public function getType(): NodeType
     {

@@ -3,6 +3,7 @@
 CLAUDE.md
 GEMINI.md
 coverage/
+build/
 vendor/
 /tester.php
 .php-cs-fixer.cache

@@ -8,6 +8,8 @@ declare(strict_types=1);
 namespace Toon\Tests\Benchmark;
 
 use PHPUnit\Framework\TestCase;
+use Toon\Exception\CircularReferenceException;
+use Toon\Exception\UnencodableException;
 use Toon\Toon;
 
 final class ToonVsJsonBench extends TestCase
@@ -117,6 +119,10 @@ final class ToonVsJsonBench extends TestCase
         return $users;
     }
 
+    /**
+     * @throws CircularReferenceException
+     * @throws UnencodableException
+     */
     public function test_toon_vs_json_benchmark(): void
     {
         echo "\n" . str_repeat('=', 100) . "\n";
@@ -134,8 +140,11 @@ final class ToonVsJsonBench extends TestCase
     }
 
     /**
+     * @param string $name
      * @param array<string, mixed> $data
      * @return array{toon_encode: float, json_encode: float, toon_decode: float, json_decode: float, toon_size: int, json_size: int}
+     * @throws CircularReferenceException
+     * @throws UnencodableException
      */
     private function benchmarkScenario(string $name, array $data): array
     {
@@ -212,7 +221,7 @@ final class ToonVsJsonBench extends TestCase
                 $name,
                 $toonEncodeUs,
                 $toonDecodeUs,
-                $result['toon_size']
+                $result['toon_size'],
             );
 
             $encodeRatio = $result['toon_encode'] / $result['json_encode'];
@@ -224,7 +233,7 @@ final class ToonVsJsonBench extends TestCase
                 "",
                 $jsonEncodeUs,
                 $jsonDecodeUs,
-                $result['json_size']
+                $result['json_size'],
             );
 
             echo sprintf(
@@ -232,7 +241,7 @@ final class ToonVsJsonBench extends TestCase
                 "",
                 $encodeRatio,
                 $decodeRatio,
-                $sizeRatio
+                $sizeRatio,
             );
 
             echo str_repeat('-', 100) . "\n";

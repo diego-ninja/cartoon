@@ -14,8 +14,7 @@ final readonly class ObjectNode implements Node
      */
     public function __construct(
         private array $properties,
-    ) {
-    }
+    ) {}
 
     public function getType(): NodeType
     {

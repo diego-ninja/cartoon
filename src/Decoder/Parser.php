@@ -1,8 +1,9 @@
 <?php
 
+declare(strict_types=1);
+
 // ABOUTME: Builds AST from token stream.
 // ABOUTME: Handles nested structures, array headers, and validation.
-
 
 namespace Toon\Decoder;
 
