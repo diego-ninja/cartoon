@@ -5,7 +5,7 @@
 
 declare(strict_types=1);
 
-namespace Toon\AST;
+namespace Ninja\Cartoon\AST;
 
 final readonly class ObjectNode implements Node
 {

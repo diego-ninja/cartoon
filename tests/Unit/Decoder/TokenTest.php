@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Unit\Decoder;
+namespace Ninja\Cartoon\Tests\Unit\Decoder;
 
 use PHPUnit\Framework\TestCase;
-use Toon\Decoder\Enum\TokenType;
-use Toon\Decoder\Token;
+use Ninja\Cartoon\Decoder\Enum\TokenType;
+use Ninja\Cartoon\Decoder\Token;
 
 final class TokenTest extends TestCase
 {

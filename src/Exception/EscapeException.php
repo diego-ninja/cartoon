@@ -5,6 +5,6 @@
 
 declare(strict_types=1);
 
-namespace Toon\Exception;
+namespace Ninja\Cartoon\Exception;
 
 final class EscapeException extends ToonException {}

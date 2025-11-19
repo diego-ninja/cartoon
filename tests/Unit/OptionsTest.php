@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Unit;
+namespace Ninja\Cartoon\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Toon\DecodeOptions;
-use Toon\EncodeOptions;
-use Toon\Enum\DelimiterType;
-use Toon\Enum\IndentationType;
+use Ninja\Cartoon\DecodeOptions;
+use Ninja\Cartoon\EncodeOptions;
+use Ninja\Cartoon\Enum\DelimiterType;
+use Ninja\Cartoon\Enum\IndentationType;
 
 final class OptionsTest extends TestCase
 {

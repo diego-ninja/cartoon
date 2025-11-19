@@ -5,10 +5,10 @@
 
 declare(strict_types=1);
 
-namespace Toon;
+namespace Ninja\Cartoon;
 
-use Toon\Enum\DelimiterType;
-use Toon\Enum\IndentationType;
+use Ninja\Cartoon\Enum\DelimiterType;
+use Ninja\Cartoon\Enum\IndentationType;
 
 final readonly class EncodeOptions
 {

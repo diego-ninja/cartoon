@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Unit\Encoder;
+namespace Ninja\Cartoon\Tests\Unit\Encoder;
 
 use PHPUnit\Framework\TestCase;
-use Toon\EncodeOptions;
-use Toon\Encoder\Writer;
-use Toon\Enum\DelimiterType;
-use Toon\Enum\IndentationType;
-use Toon\Exception\CircularReferenceException;
-use Toon\Exception\UnencodableException;
+use Ninja\Cartoon\EncodeOptions;
+use Ninja\Cartoon\Encoder\Writer;
+use Ninja\Cartoon\Enum\DelimiterType;
+use Ninja\Cartoon\Enum\IndentationType;
+use Ninja\Cartoon\Exception\CircularReferenceException;
+use Ninja\Cartoon\Exception\UnencodableException;
 
 final class WriterTest extends TestCase
 {

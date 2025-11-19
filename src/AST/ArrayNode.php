@@ -5,9 +5,9 @@ declare(strict_types=1);
 // ABOUTME: Represents an array (ordered sequence) in the AST.
 // ABOUTME: Tracks delimiter type and declared length for validation.
 
-namespace Toon\AST;
+namespace Ninja\Cartoon\AST;
 
-use Toon\Enum\DelimiterType;
+use Ninja\Cartoon\Enum\DelimiterType;
 
 final readonly class ArrayNode implements Node
 {

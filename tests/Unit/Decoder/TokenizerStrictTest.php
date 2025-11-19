@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Unit\Decoder;
+namespace Ninja\Cartoon\Tests\Unit\Decoder;
 
 use PHPUnit\Framework\TestCase;
-use Toon\DecodeOptions;
-use Toon\Decoder\Tokenizer;
-use Toon\Exception\SyntaxException;
+use Ninja\Cartoon\DecodeOptions;
+use Ninja\Cartoon\Decoder\Tokenizer;
+use Ninja\Cartoon\Exception\SyntaxException;
 
 final class TokenizerStrictTest extends TestCase
 {

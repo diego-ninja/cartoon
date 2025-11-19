@@ -5,12 +5,12 @@
 
 declare(strict_types=1);
 
-namespace Toon\Encoder;
+namespace Ninja\Cartoon\Encoder;
 
-use Toon\EncodeOptions;
-use Toon\Enum\IndentationType;
-use Toon\Exception\CircularReferenceException;
-use Toon\Exception\UnencodableException;
+use Ninja\Cartoon\EncodeOptions;
+use Ninja\Cartoon\Enum\IndentationType;
+use Ninja\Cartoon\Exception\CircularReferenceException;
+use Ninja\Cartoon\Exception\UnencodableException;
 
 final class Writer
 {

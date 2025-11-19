@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Unit\AST;
+namespace Ninja\Cartoon\Tests\Unit\AST;
 
 use PHPUnit\Framework\TestCase;
-use Toon\AST\NodeType;
-use Toon\AST\PrimitiveNode;
+use Ninja\Cartoon\AST\NodeType;
+use Ninja\Cartoon\AST\PrimitiveNode;
 
 final class PrimitiveNodeTest extends TestCase
 {

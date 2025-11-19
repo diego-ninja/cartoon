@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Integration;
+namespace Ninja\Cartoon\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
-use Toon\Toon;
-use Toon\EncodeOptions;
-use Toon\DecodeOptions;
+use Ninja\Cartoon\Toon;
+use Ninja\Cartoon\EncodeOptions;
+use Ninja\Cartoon\DecodeOptions;
 
 final class HelperFunctionsTest extends TestCase
 {

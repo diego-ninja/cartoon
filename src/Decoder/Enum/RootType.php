@@ -5,7 +5,7 @@
 
 declare(strict_types=1);
 
-namespace Toon\Decoder\Enum;
+namespace Ninja\Cartoon\Decoder\Enum;
 
 enum RootType
 {

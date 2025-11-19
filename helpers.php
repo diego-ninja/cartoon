@@ -1,10 +1,10 @@
 <?php
 
-use Toon\DecodeOptions;
-use Toon\EncodeOptions;
-use Toon\Exception\CircularReferenceException;
-use Toon\Exception\UnencodableException;
-use Toon\Toon;
+use Ninja\Cartoon\DecodeOptions;
+use Ninja\Cartoon\EncodeOptions;
+use Ninja\Cartoon\Exception\CircularReferenceException;
+use Ninja\Cartoon\Exception\UnencodableException;
+use Ninja\Cartoon\Toon;
 
 if (! function_exists('toon_encode')) {
     /**

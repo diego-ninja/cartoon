@@ -2,10 +2,17 @@
 
 High-performance PHP 8.4+ library for encoding and decoding TOON (Token-Oriented Object Notation) format with full spec compliance.
 
-[![CI](https://github.com/YOUR_USERNAME/toon/workflows/CI/badge.svg)](https://github.com/YOUR_USERNAME/toon/actions)
-[![Coverage Status](https://coveralls.io/repos/github/YOUR_USERNAME/toon/badge.svg?branch=main)](https://coveralls.io/github/YOUR_USERNAME/toon?branch=main)
-[![PHP Version](https://img.shields.io/badge/php-8.4%2B-blue)](https://php.net)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/diego-ninja/cartoon.svg?style=flat-square&color=blue&logoColor=%23949ca4&labelColor=%233f4750)](https://packagist.org/packages/diego-ninja/cartoon)
+[![Total Downloads](https://img.shields.io/packagist/dt/diego-ninja/cartoon.svg?style=flat-square&color=blue&logoColor=%23949ca4&labelColor=%233f4750)](https://packagist.org/packages/diego-ninja/cartoon)
+![PHP Version](https://img.shields.io/packagist/php-v/diego-ninja/cartoon.svg?style=flat-square&color=blue&logoColor=%23949ca4&labelColor=%233f4750)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&color=blue&logoColor=%23949ca4&labelColor=%233f4750)](https://opensource.org/licenses/MIT)
+![GitHub last commit](https://img.shields.io/github/last-commit/diego-ninja/cartoon?style=flat-square&color=blue&logoColor=%23949ca4&labelColor=%233f4750)
+[![wakatime](https://wakatime.com/badge/user/bd65f055-c9f3-4f73-92aa-3c9810f70cc3/project/3cc2ec60-a8b4-4ddc-aeac-ea78e37a094b.svg?style=flat-square&color=blue&logoColor=%23949ca4&labelColor=%233f4750)](https://wakatime.com/badge/user/bd65f055-c9f3-4f73-92aa-3c9810f70cc3/project/3cc2ec60-a8b4-4ddc-aeac-ea78e37a094b)
+
+[![Tests](https://img.shields.io/github/actions/workflow/status/diego-ninja/cartoon/tests.yml?branch=main&style=flat-square&logo=github&label=tests&logoColor=%23949ca4&labelColor=%233f4750)]()
+[![Static Analysis](https://img.shields.io/github/actions/workflow/status/diego-ninja/cartoon/static-analysis.yml?branch=main&style=flat-square&logo=github&label=phpstan%2010&logoColor=%23949ca4&labelColor=%233f4750)]()
+[![Code Style](https://img.shields.io/github/actions/workflow/status/diego-ninja/cartoon/code-style.yml?branch=main&style=flat-square&logo=github&label=pint%3A%20PER&logoColor=%23949ca4&labelColor=%233f4750)]()
+[![Coveralls](https://img.shields.io/coverallsCoverage/github/diego-ninja/cartoon?branch=main&style=flat-square&logo=coveralls&logoColor=%23949ca4&labelColor=%233f4750&link=https%3A%2F%2Fcoveralls.io%2Fgithub%2Fdiego-ninja%2Fcartoon)]()
 
 ## Features
 
@@ -29,7 +36,7 @@ composer require toon/toon
 ### Decoding TOON to PHP
 
 ```php
-use Toon\Toon;
+use Ninja\Cartoon\Toon;
 
 $toon = <<<TOON
 name: Alice
@@ -44,7 +51,7 @@ $data = Toon::decode($toon);
 ### Encoding PHP to TOON
 
 ```php
-use Toon\Toon;
+use Ninja\Cartoon\Toon;
 
 $data = [
     'name' => 'Bob',
@@ -67,7 +74,7 @@ tags[3]: php,toon,awesome
 ### Custom Encoding Options
 
 ```php
-use Toon\{EncodeOptions,Enum\DelimiterType,Enum\IndentationType,Toon};
+use Ninja\Cartoon\{EncodeOptions,Enum\DelimiterType,Enum\IndentationType,Toon};
 
 $options = new EncodeOptions(
     preferredDelimiter: DelimiterType::Tab,
@@ -82,7 +89,7 @@ $toon = Toon::encode($data, $options);
 ### Custom Decoding Options
 
 ```php
-use Toon\{Toon, DecodeOptions};
+use Ninja\Cartoon\{Toon, DecodeOptions};
 
 $options = new DecodeOptions(
     strict: false,              // Allow non-canonical input

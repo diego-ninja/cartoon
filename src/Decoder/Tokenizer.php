@@ -5,11 +5,11 @@
 
 declare(strict_types=1);
 
-namespace Toon\Decoder;
+namespace Ninja\Cartoon\Decoder;
 
-use Toon\DecodeOptions;
-use Toon\Exception\SyntaxException;
-use Toon\Decoder\Enum\TokenType;
+use Ninja\Cartoon\DecodeOptions;
+use Ninja\Cartoon\Exception\SyntaxException;
+use Ninja\Cartoon\Decoder\Enum\TokenType;
 
 final class Tokenizer
 {

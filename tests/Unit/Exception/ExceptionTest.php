@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Unit\Exception;
+namespace Ninja\Cartoon\Tests\Unit\Exception;
 
 use PHPUnit\Framework\TestCase;
-use Toon\Exception\CircularReferenceException;
-use Toon\Exception\EscapeException;
-use Toon\Exception\SyntaxException;
-use Toon\Exception\ToonException;
-use Toon\Exception\UnencodableException;
-use Toon\Exception\ValidationException;
+use Ninja\Cartoon\Exception\CircularReferenceException;
+use Ninja\Cartoon\Exception\EscapeException;
+use Ninja\Cartoon\Exception\SyntaxException;
+use Ninja\Cartoon\Exception\ToonException;
+use Ninja\Cartoon\Exception\UnencodableException;
+use Ninja\Cartoon\Exception\ValidationException;
 
 final class ExceptionTest extends TestCase
 {

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Integration;
+namespace Ninja\Cartoon\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
-use Toon\Toon;
+use Ninja\Cartoon\Toon;
 
 final class BasicRoundTripTest extends TestCase
 {

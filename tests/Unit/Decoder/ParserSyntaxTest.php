@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Unit\Decoder;
+namespace Ninja\Cartoon\Tests\Unit\Decoder;
 
 use PHPUnit\Framework\TestCase;
-use Toon\AST\ObjectNode;
-use Toon\DecodeOptions;
-use Toon\Decoder\Parser;
-use Toon\Decoder\Token;
-use Toon\Decoder\Enum\TokenType;
-use Toon\Exception\SyntaxException;
+use Ninja\Cartoon\AST\ObjectNode;
+use Ninja\Cartoon\DecodeOptions;
+use Ninja\Cartoon\Decoder\Parser;
+use Ninja\Cartoon\Decoder\Token;
+use Ninja\Cartoon\Decoder\Enum\TokenType;
+use Ninja\Cartoon\Exception\SyntaxException;
 
 final class ParserSyntaxTest extends TestCase
 {

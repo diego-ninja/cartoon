@@ -5,9 +5,9 @@
 
 declare(strict_types=1);
 
-namespace Toon\Decoder;
+namespace Ninja\Cartoon\Decoder;
 
-use Toon\Decoder\Enum\TokenType;
+use Ninja\Cartoon\Decoder\Enum\TokenType;
 
 final readonly class Token
 {

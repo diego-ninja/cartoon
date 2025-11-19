@@ -5,9 +5,9 @@
 
 declare(strict_types=1);
 
-namespace Toon\Decoder;
+namespace Ninja\Cartoon\Decoder;
 
-use Toon\Exception\EscapeException;
+use Ninja\Cartoon\Exception\EscapeException;
 
 final class ValueParser
 {

@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Unit\AST;
+namespace Ninja\Cartoon\Tests\Unit\AST;
 
 use PHPUnit\Framework\TestCase;
-use Toon\AST\ArrayNode;
-use Toon\AST\NodeType;
-use Toon\AST\ObjectNode;
-use Toon\AST\PrimitiveNode;
-use Toon\Enum\DelimiterType;
+use Ninja\Cartoon\AST\ArrayNode;
+use Ninja\Cartoon\AST\NodeType;
+use Ninja\Cartoon\AST\ObjectNode;
+use Ninja\Cartoon\AST\PrimitiveNode;
+use Ninja\Cartoon\Enum\DelimiterType;
 
 final class ArrayNodeTest extends TestCase
 {

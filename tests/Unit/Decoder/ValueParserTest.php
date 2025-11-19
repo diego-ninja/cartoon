@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Unit\Decoder;
+namespace Ninja\Cartoon\Tests\Unit\Decoder;
 
 use PHPUnit\Framework\TestCase;
-use Toon\Decoder\ValueParser;
-use Toon\Exception\EscapeException;
-use Toon\Exception\SyntaxException;
+use Ninja\Cartoon\Decoder\ValueParser;
+use Ninja\Cartoon\Exception\EscapeException;
+use Ninja\Cartoon\Exception\SyntaxException;
 
 final class ValueParserTest extends TestCase
 {

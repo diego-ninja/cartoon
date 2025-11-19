@@ -5,12 +5,12 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Benchmark;
+namespace Ninja\Cartoon\Tests\Benchmark;
 
 use PHPUnit\Framework\TestCase;
-use Toon\Exception\CircularReferenceException;
-use Toon\Exception\UnencodableException;
-use Toon\Toon;
+use Ninja\Cartoon\Exception\CircularReferenceException;
+use Ninja\Cartoon\Exception\UnencodableException;
+use Ninja\Cartoon\Toon;
 
 final class ToonVsJsonBench extends TestCase
 {
@@ -148,7 +148,7 @@ final class ToonVsJsonBench extends TestCase
      */
     private function benchmarkScenario(string $name, array $data): array
     {
-        $decodeOptions = new \Toon\DecodeOptions(strict: false);
+        $decodeOptions = new \Ninja\Cartoon\DecodeOptions(strict: false);
 
         // Warm up
         Toon::encode($data);

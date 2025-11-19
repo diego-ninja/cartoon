@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Unit\Decoder;
+namespace Ninja\Cartoon\Tests\Unit\Decoder;
 
 use PHPUnit\Framework\TestCase;
-use Toon\AST\ArrayNode;
-use Toon\AST\ObjectNode;
-use Toon\AST\PrimitiveNode;
-use Toon\DecodeOptions;
-use Toon\Decoder\Enum\TokenType;
-use Toon\Decoder\Parser;
-use Toon\Decoder\Token;
-use Toon\Exception\ValidationException;
+use Ninja\Cartoon\AST\ArrayNode;
+use Ninja\Cartoon\AST\ObjectNode;
+use Ninja\Cartoon\AST\PrimitiveNode;
+use Ninja\Cartoon\DecodeOptions;
+use Ninja\Cartoon\Decoder\Enum\TokenType;
+use Ninja\Cartoon\Decoder\Parser;
+use Ninja\Cartoon\Decoder\Token;
+use Ninja\Cartoon\Exception\ValidationException;
 
 final class ParserTest extends TestCase
 {

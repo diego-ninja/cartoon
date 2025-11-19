@@ -5,20 +5,20 @@ declare(strict_types=1);
 // ABOUTME: Builds AST from token stream.
 // ABOUTME: Handles nested structures, array headers, and validation.
 
-namespace Toon\Decoder;
+namespace Ninja\Cartoon\Decoder;
 
-use Toon\AST\ArrayNode;
-use Toon\AST\Node;
-use Toon\AST\ObjectNode;
-use Toon\AST\PrimitiveNode;
-use Toon\DecodeOptions;
-use Toon\Decoder\Enum\RootType;
-use Toon\Decoder\Enum\TokenType;
-use Toon\Decoder\ValueParser;
-use Toon\Enum\DelimiterType;
-use Toon\Exception\EscapeException;
-use Toon\Exception\SyntaxException;
-use Toon\Exception\ValidationException;
+use Ninja\Cartoon\AST\ArrayNode;
+use Ninja\Cartoon\AST\Node;
+use Ninja\Cartoon\AST\ObjectNode;
+use Ninja\Cartoon\AST\PrimitiveNode;
+use Ninja\Cartoon\DecodeOptions;
+use Ninja\Cartoon\Decoder\Enum\RootType;
+use Ninja\Cartoon\Decoder\Enum\TokenType;
+use Ninja\Cartoon\Decoder\ValueParser;
+use Ninja\Cartoon\Enum\DelimiterType;
+use Ninja\Cartoon\Exception\EscapeException;
+use Ninja\Cartoon\Exception\SyntaxException;
+use Ninja\Cartoon\Exception\ValidationException;
 
 final class Parser
 {

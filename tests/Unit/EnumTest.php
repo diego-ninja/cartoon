@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Unit;
+namespace Ninja\Cartoon\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use Toon\AST\NodeType;
-use Toon\Decoder\Enum\RootType;
-use Toon\Enum\DelimiterType;
-use Toon\Enum\IndentationType;
+use Ninja\Cartoon\AST\NodeType;
+use Ninja\Cartoon\Decoder\Enum\RootType;
+use Ninja\Cartoon\Enum\DelimiterType;
+use Ninja\Cartoon\Enum\IndentationType;
 
 final class EnumTest extends TestCase
 {

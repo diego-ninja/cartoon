@@ -5,13 +5,13 @@
 
 declare(strict_types=1);
 
-namespace Toon\Tests\Integration;
+namespace Ninja\Cartoon\Tests\Integration;
 
 use PHPUnit\Framework\TestCase;
-use Toon\Exception\CircularReferenceException;
-use Toon\Exception\EscapeException;
-use Toon\Exception\UnencodableException;
-use Toon\Toon;
+use Ninja\Cartoon\Exception\CircularReferenceException;
+use Ninja\Cartoon\Exception\EscapeException;
+use Ninja\Cartoon\Exception\UnencodableException;
+use Ninja\Cartoon\Toon;
 
 final class ErrorHandlingTest extends TestCase
 {

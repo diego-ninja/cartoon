@@ -5,7 +5,7 @@
 
 declare(strict_types=1);
 
-namespace Toon\Enum;
+namespace Ninja\Cartoon\Enum;
 
 enum DelimiterType: string
 {

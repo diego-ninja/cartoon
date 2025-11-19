@@ -5,13 +5,13 @@
 
 declare(strict_types=1);
 
-namespace Toon;
+namespace Ninja\Cartoon;
 
-use Toon\Decoder\Parser;
-use Toon\Decoder\Tokenizer;
-use Toon\Encoder\Writer;
-use Toon\Exception\CircularReferenceException;
-use Toon\Exception\UnencodableException;
+use Ninja\Cartoon\Decoder\Parser;
+use Ninja\Cartoon\Decoder\Tokenizer;
+use Ninja\Cartoon\Encoder\Writer;
+use Ninja\Cartoon\Exception\CircularReferenceException;
+use Ninja\Cartoon\Exception\UnencodableException;
 
 final readonly class Toon
 {
