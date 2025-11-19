@@ -2,6 +2,8 @@
 
 High-performance PHP 8.4+ library for encoding and decoding TOON (Token-Oriented Object Notation) format with full spec compliance.
 
+[![CI](https://github.com/YOUR_USERNAME/toon/workflows/CI/badge.svg)](https://github.com/YOUR_USERNAME/toon/actions)
+[![Coverage Status](https://coveralls.io/repos/github/YOUR_USERNAME/toon/badge.svg?branch=main)](https://coveralls.io/github/YOUR_USERNAME/toon?branch=main)
 [![PHP Version](https://img.shields.io/badge/php-8.4%2B-blue)](https://php.net)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
